@@ -11,7 +11,6 @@ interface CardBasicProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 const CardBasic = ({ className, items, ...props }: CardBasicProps) => {
-  console.log(props);
   return (
     <div className={cn(className)} {...props}>
       {items.map((item, index) => (

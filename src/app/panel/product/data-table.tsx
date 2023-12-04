@@ -69,7 +69,7 @@ const DataTable = <TData, TValue>({ columns, data }: DataTableProps<TData, TValu
   return (
     <>
       <div className="flex items-center mb-3">
-        <DataTableActions />
+        <DataTableActions table={table} />
       </div>
       <DataTableToolbar table={table} />
       <div className="rounded-md border">

@@ -11,7 +11,7 @@ import {
 import { UseFormReturn } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 
-interface FormAddProductProps {
+interface FormEditProductProps {
   form: UseFormReturn<
     {
       productCode: string;
@@ -27,7 +27,7 @@ interface FormAddProductProps {
   >;
 }
 
-export function FormAddProduct({ form }: FormAddProductProps) {
+export function FormEditProduct({ form }: FormEditProductProps) {
   return (
     <Form {...form}>
       <div className="flex gap-3">
@@ -76,10 +76,10 @@ export function FormAddProduct({ form }: FormAddProductProps) {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
-                          <SelectItem value="game">Game</SelectItem>
-                          <SelectItem value="pulsa">Pulsa</SelectItem>
-                          <SelectItem value="listrik">Listrik</SelectItem>
-                          <SelectItem value="voucher">voucher</SelectItem>
+                          <SelectItem value="Game">Game</SelectItem>
+                          <SelectItem value="Pulsa">Pulsa</SelectItem>
+                          <SelectItem value="Listrik">Listrik</SelectItem>
+                          <SelectItem value="Voucher">voucher</SelectItem>
                         </SelectGroup>
                       </SelectContent>
                     </Select>
