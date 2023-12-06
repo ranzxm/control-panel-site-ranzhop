@@ -1,4 +1,4 @@
-import { Product } from "../columns";
+import { Product } from "../components/products/columns";
 
 export default async function getProductData(): Promise<Product[]> {
   return [

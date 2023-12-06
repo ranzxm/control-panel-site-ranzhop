@@ -1,16 +1,15 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import {
   ColumnDef,
   flexRender,
-  SortingState,
-  getSortedRowModel,
-  VisibilityState,
   getCoreRowModel,
   useReactTable,
-  ColumnFiltersState,
   getFilteredRowModel,
+  ColumnFiltersState,
+  SortingState,
+  VisibilityState,
+  getSortedRowModel,
   getPaginationRowModel,
 } from "@tanstack/react-table";
 import {
@@ -21,21 +20,21 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { DataTableToolbar } from "./components/data-table-toolbar";
-import { DataTablePagination } from "./components/data-table-pagination";
-import { DataTableActions } from "./components/data-table-actions";
+import React from "react";
+import DataTableToolbar from "./data-table-toolbar";
+import DataTableAction from "./data-table-actions";
+import { DataTablePagination } from "./data-table-pagination";
 
-interface DataTableProps<TData, TValue> {
+interface TableTypesProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
-const DataTable = <TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) => {
+export function TableTypes<TData, TValue>({ columns, data }: TableTypesProps<TData, TValue>) {
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
-  const [sorting, setSorting] = useState<SortingState>([]);
-
   const table = useReactTable({
     data,
     columns,
@@ -60,17 +59,9 @@ const DataTable = <TData, TValue>({ columns, data }: DataTableProps<TData, TValu
     getPaginationRowModel: getPaginationRowModel(),
   });
 
-  useEffect(() => {
-    table.getColumn("productCode")?.toggleVisibility(false);
-    table.getColumn("capitalPrice")?.toggleVisibility(false);
-    table.getColumn("profit")?.toggleVisibility(false);
-  }, []);
-
   return (
     <>
-      <div className="flex items-center mb-3">
-        <DataTableActions table={table} />
-      </div>
+      <DataTableAction table={table} />
       <DataTableToolbar table={table} />
       <div className="rounded-md border">
         <Table>
@@ -113,6 +104,4 @@ const DataTable = <TData, TValue>({ columns, data }: DataTableProps<TData, TValu
       <DataTablePagination table={table} />
     </>
   );
-};
-
-export default DataTable;
+}

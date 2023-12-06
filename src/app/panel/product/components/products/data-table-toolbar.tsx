@@ -2,7 +2,7 @@ import { Input } from "@/components/ui/input";
 import { Table } from "@tanstack/react-table";
 import { DataTableViewOptions } from "./data-table-viewoptions";
 import { DataTableFacetedFilter } from "./data-table-faceted";
-import { providers, typeProduct } from "../../user/data/data";
+import { providers, typeProduct } from "../../../user/data/data";
 import { Button } from "@/components/ui/button";
 
 interface DataTableToolbarProps<TData> {

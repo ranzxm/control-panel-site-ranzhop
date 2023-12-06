@@ -1,0 +1,74 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id Int @id @unique
+  name String
+  email String @unique
+  password String
+  role String
+  transactions Transaction[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TypeProduct {
+  id String @id @unique
+  name String
+  label String
+  value String
+  product Product[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProviderProduct {
+  id String @id @unique
+  name String
+  label String
+  value String
+  product Product[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id String @id @unique @default(cuid())
+  productCode String @unique
+  name String
+  typeId String @unique
+  type TypeProduct @relation(fields: [typeId], references: [id])
+  providerId String @unique
+  provider ProviderProduct @relation(fields: [providerId], references: [id])
+  transactionItem TransactionItem[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Transaction {
+  id String @id @unique
+  orderStatus String
+  orderDate DateTime @default(now())
+  staffId Int
+  staff User @relation(fields: [staffId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TransactionItem {
+  id String @id @unique @default(uuid())
+  productId String
+  product Product @relation(fields: [productId], references: [id])
+  discount Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

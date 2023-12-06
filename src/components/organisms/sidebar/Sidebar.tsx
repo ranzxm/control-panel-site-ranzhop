@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
 import SidebarNav from "@/components/sidebar-nav";
 import {
@@ -14,6 +14,7 @@ import {
   ExitIcon,
 } from "@radix-ui/react-icons";
 import { Separator } from "@radix-ui/react-dropdown-menu";
+import { signOut } from "next-auth/react";
 
 const Sidebar = () => {
   const sidebarNavItems = [
@@ -42,11 +43,6 @@ const Sidebar = () => {
       href: "/panel/setting",
       icon: <GearIcon />,
     },
-    {
-      title: "Sign Out",
-      href: "/panel/signout",
-      icon: <ExitIcon />,
-    },
   ];
   const pathname = usePathname();
   return (
@@ -54,6 +50,10 @@ const Sidebar = () => {
       <div className="navigation-menu">
         <div className="navigation-menu-list">
           <SidebarNav items={sidebarNavItems} />
+          <Button variant={"ghost"} className="w-full justify-start flex" onClick={() => signOut()}>
+            <ExitIcon className="mr-3" />
+            SignOut
+          </Button>
         </div>
       </div>
       <Separator aria-orientation="vertical" className="ml-9 border" />

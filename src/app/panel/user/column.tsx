@@ -14,45 +14,44 @@ import { Button } from "@/components/ui/button";
 import { MoreHorizontalIcon } from "lucide-react";
 
 export type User = {
-  id: string;
+  id: number;
   name: string;
   email: string;
-  role: "admin" | "staff";
+  role: string;
 };
 
-export const users: User[] = [
-  {
-    id: "frnssmmr",
-    name: "Frans Simamora",
-    email: "frans@gmail.com",
-    role: "admin",
-  },
-  {
-    id: "rbrtgnwn",
-    name: "Robert Gunawan",
-    email: "robert@gmail.com",
-    role: "staff",
-  },
+//   {
+//     id: "frnssmmr",
+//     name: "Frans Simamora",
+//     email: "frans@gmail.com",
+//     role: "admin",
+//   },
+//   {
+//     id: "rbrtgnwn",
+//     name: "Robert Gunawan",
+//     email: "robert@gmail.com",
+//     role: "staff",
+//   },
 
-  {
-    id: "biladimana",
-    name: "Bila Dimana",
-    email: "bila@gmail.com",
-    role: "staff",
-  },
-  {
-    id: "irfnkplng",
-    name: "Irfan Kopling",
-    email: "irfan@gmail.com",
-    role: "staff",
-  },
-  {
-    id: "jpridngkl",
-    name: "Jepri Dongkol",
-    email: "jepri@gmail.com",
-    role: "staff",
-  },
-];
+//   {
+//     id: "biladimana",
+//     name: "Bila Dimana",
+//     email: "bila@gmail.com",
+//     role: "staff",
+//   },
+//   {
+//     id: "irfnkplng",
+//     name: "Irfan Kopling",
+//     email: "irfan@gmail.com",
+//     role: "staff",
+//   },
+//   {
+//     id: "jpridngkl",
+//     name: "Jepri Dongkol",
+//     email: "jepri@gmail.com",
+//     role: "staff",
+//   },
+// ];
 
 export const columns: ColumnDef<User>[] = [
   {

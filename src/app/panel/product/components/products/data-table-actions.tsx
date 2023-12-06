@@ -10,11 +10,10 @@ import {
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { ProductSchema, productSchema } from "../data/schema";
+import { ProductSchema, productSchema } from "../../data/schema";
 import { FormAddProduct } from "./form-add-product";
 import React from "react";
-import { RowModel, Table } from "@tanstack/react-table";
-import { Product } from "../columns";
+import { Table } from "@tanstack/react-table";
 import { FormEditProduct } from "./form-edit-product";
 
 interface DataTableActionsProps<TData> {
@@ -60,7 +59,6 @@ export function DataTableActions<TData extends any>({ table }: DataTableActionsP
   const handleEditButton = () => {
     try {
       setData(table.getSelectedRowModel().rows[0].original);
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -80,14 +78,16 @@ export function DataTableActions<TData extends any>({ table }: DataTableActionsP
       </Dialog>
       <div className="flex ml-auto">
         <Dialog onOpenChange={() => formEdit.reset()}>
-          {table.getIsSomeRowsSelected() ? (
+          {table.getIsSomeRowsSelected() && (
             <div className="space-x-3">
-              <DialogTrigger
-                className={cn(buttonVariants({ variant: "outline" }))}
-                onClick={() => handleEditButton()}
-              >
-                Edit
-              </DialogTrigger>
+              {table.getFilteredSelectedRowModel().rows.length <= 1 && (
+                <DialogTrigger
+                  className={cn(buttonVariants({ variant: "outline" }))}
+                  onClick={() => handleEditButton()}
+                >
+                  Edit
+                </DialogTrigger>
+              )}
               <Dialog>
                 <DialogTrigger className={cn(buttonVariants({ variant: "destructive" }))}>
                   Delete
@@ -95,17 +95,20 @@ export function DataTableActions<TData extends any>({ table }: DataTableActionsP
                 <DialogContent>
                   <DialogHeader>
                     <DialogTitle className="mb-3">Delete Product</DialogTitle>
-                    <DialogDescription>Are you sure to delete this product ?</DialogDescription>
+                    <DialogDescription>
+                      Are you sure to delete {table.getFilteredSelectedRowModel().rows.length}{" "}
+                      product ?
+                    </DialogDescription>
                   </DialogHeader>
                   <div className="buttonAction space-x-3 ml-auto">
                     <Button variant={"secondary"}>No</Button>
-                    <Button variant={"secondary"}>Yes</Button>
+                    <Button variant={"secondary"} className="hover:bg-red-700">
+                      Yes
+                    </Button>
                   </div>
                 </DialogContent>
               </Dialog>
             </div>
-          ) : (
-            ``
           )}
           <DialogContent>
             <DialogHeader>
